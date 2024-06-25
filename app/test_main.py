@@ -80,7 +80,7 @@ def test_delete_product(test_client):
     product_id = response.json()["id"]
 
     # Delete the product
-    response = test_client.delete(f"/products/{product_id}")
+    response = test_client.delete(f"/products/{product_id}", auth=(settings.auth_username, settings.auth_password))
     assert response.status_code == 204
 
     # Read the product

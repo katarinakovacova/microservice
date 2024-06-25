@@ -6,5 +6,7 @@ class Settings(BaseSettings):
     refresh_token: str
     offers_base_url: str
     is_testing: bool = False
+    auth_username: str
+    auth_password: str
 
     model_config = SettingsConfigDict(env_file=".env")

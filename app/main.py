@@ -1,8 +1,10 @@
 import asyncio
 from datetime import datetime
 from functools import lru_cache
+import secrets
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.security import HTTPBasic
 from pydantic.types import UUID4
 from sqlalchemy.orm import Session
 
@@ -28,6 +30,30 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+security = HTTPBasic()
+
+
+def validate_credentials(credentials = Depends(security)) -> bool:
+    current_username_bytes = credentials.username.encode("utf8")
+    correct_username_bytes = settings.auth_username.encode("utf8")
+
+    is_correct_username = secrets.compare_digest(current_username_bytes, correct_username_bytes)
+
+    current_password_bytes = credentials.password.encode("utf8")
+    correct_password_bytes = settings.auth_password.encode("utf8")
+
+    is_correct_password = secrets.compare_digest(current_password_bytes, correct_password_bytes)
+
+    if not (is_correct_username and is_correct_password):
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    
+    return True
 
 
 access_token = None
@@ -102,7 +128,7 @@ def update_product(product_id: UUID4, product: schemas.ProductCreate, db: Sessio
 
 
 @app.delete("/products/{product_id}", status_code=204)
-def delete_product(product_id: UUID4, db: Session = Depends(get_db)):
+def delete_product(product_id: UUID4, db: Session = Depends(get_db), is_validated: bool = Depends(validate_credentials)):
     crud.delete_product(db=db, product_id=product_id)
 
 

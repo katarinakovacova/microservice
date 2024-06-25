@@ -11,7 +11,8 @@ def get_engine(postgres_password: str):
         drivername="postgresql",
         username="postgres",
         password=postgres_password,
-        host="localhost",
+        # host="localhost",
+        host="db",
         database="postgres",
         port=5432,
     )

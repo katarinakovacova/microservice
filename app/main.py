@@ -72,7 +72,8 @@ async def update_offers_loop():
         if not settings.is_testing:
             db = get_session(engine)
             offers.update_offers(settings.offers_base_url, access_token, db)
-        await asyncio.sleep(30)
+            db.close()
+        await asyncio.sleep(60)
 
 
 app = FastAPI()

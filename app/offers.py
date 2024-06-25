@@ -11,10 +11,10 @@ def refresh_access_token(offers_base_url: str, refresh_token: str) -> str | None
     
     if response.status_code == 201:
         access_token = response.json().get("access_token")
-        print(f"{datetime.now()} INFO {access_token}")
+        print(f"{datetime.now()} INFO New access token {access_token}")
         return access_token
     else:
-        print(f"{datetime.now()} ERROR {response.status_code} {response.text}")
+        print(f"{datetime.now()} ERROR Failed to obtain new access token {response.status_code} {response.text}")
         return None
     
 
@@ -32,12 +32,13 @@ def get_product_offers(product_id: str, access_token: str, offers_base_url: str)
         print(f"{datetime.now()} INFO Obtained {len(offers)} offers for product {product_id}")
         return offers
     else:
-        print(f"{datetime.now()} ERROR {response.status_code} {response.text}")
+        print(f"{datetime.now()} ERROR Failed to obtain offers for product {product_id} {response.status_code} {response.text}")
         return None
 
 
 def update_offers(offers_base_url: str, access_token: str, db: Session):
     db_products = crud.get_all_products(db)
+    print(f"{datetime.now()} INFO Try to obtain offers for {len(db_products)} products")
 
     for db_product in db_products:
         offers = get_product_offers(db_product.id, access_token, offers_base_url)

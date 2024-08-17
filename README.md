@@ -1,4 +1,4 @@
-# microservice 
+# Microservice 
 
 Product aggregator microservice. It is REST API Python microservice which allows users to browse a product catalogue and which automatically updates prices from the offer service, provided by Applifting. 
 
@@ -23,3 +23,7 @@ docker compose up --build
 ## Documentation
 
 Once the app is running, you can obtained Swagger documentation at `/docs` endpoint. 
+
+## Contact
+
+For any questions or support, please contact [Katarína Kováčová](mailto:katarinakovacova100@gmail.com).

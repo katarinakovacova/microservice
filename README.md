@@ -10,7 +10,7 @@ The Product Aggregator Microservice is a REST API built with Python that enables
 - **Automatic Price Updates**: Prices are updated in real-time from the offer service, ensuring users have access to the latest information.
 - **User Authentication**: Secure access to the microservice is facilitated through authentication mechanisms.
 - **Containerized Environment**: The microservice is packaged in Docker containers for easy deployment and scalability.
-- 
+  
 ## Usage
 
 This microservice is containerized. You will need Docker to run this app. To run this app please create `.env` file which has the following template:

@@ -1,7 +1,16 @@
 # Microservice 
 
-Product aggregator microservice. It is REST API Python microservice which allows users to browse a product catalogue and which automatically updates prices from the offer service, provided by Applifting. 
+## Overview
 
+The Product Aggregator Microservice is a REST API built with Python that enables users to browse a dynamic product catalogue. This microservice automatically updates product prices by fetching data from the offer service provided by Applifting. It is designed for scalability and efficiency, allowing seamless integration with various frontend applications.
+
+## Features
+
+- **Product Catalogue Browsing**: Users can easily navigate through a wide range of products.
+- **Automatic Price Updates**: Prices are updated in real-time from the offer service, ensuring users have access to the latest information.
+- **User Authentication**: Secure access to the microservice is facilitated through authentication mechanisms.
+- **Containerized Environment**: The microservice is packaged in Docker containers for easy deployment and scalability.
+- 
 ## Usage
 
 This microservice is containerized. You will need Docker to run this app. To run this app please create `.env` file which has the following template:
